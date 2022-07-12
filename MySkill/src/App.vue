@@ -1,7 +1,7 @@
 <template>
   <ion-app>
-    <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="overlay">
+    <ion-split-pane when="false" content-id="main-content">
+      <ion-menu content-id="main-content" type="overlay" menuId="main-manu">
         <ion-content>
           <ion-list id="inbox-list">
             <ion-list-header>Li Zheng's Skills</ion-list-header>

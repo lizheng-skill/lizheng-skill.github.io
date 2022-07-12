@@ -3,9 +3,12 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-menu-button color="primary"></ion-menu-button>
+          <ion-menu-button color="primary" menu="main-manu"></ion-menu-button>
         </ion-buttons>
         <ion-title>{{ $route.params.id }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-menu-button color="secondary" auto-hide="false" :menu="$route.params.id.toLowerCase()+'-details'"></ion-menu-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     
@@ -15,19 +18,20 @@
           <ion-title size="large">{{ $route.params.id }}</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <div id="container">
-        <strong class="capitalize">{{ $route.params.id }}</strong>
-        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
+      <component v-bind:is="currentSkillComponent"></component>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent} from 'vue';
+import DLPComponent from "./skills/DLPComponent.vue";
+import EDIComponent from "./skills/EDIComponent.vue";
+import IonicComponent from "./skills/IonicComponent.vue";
+import MFAComponent from "./skills/MFAComponent.vue";
+import RPAComponent from "./skills/RPAComponent.vue";
+import SAPComponent from "./skills/SAPComponent.vue";
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-
 export default defineComponent({
   name: 'SkillPage',
   components: {
@@ -37,7 +41,18 @@ export default defineComponent({
     IonMenuButton,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    DLPComponent,
+    EDIComponent,
+    IonicComponent,
+    MFAComponent,
+    RPAComponent,
+    SAPComponent
+  },
+  computed:{
+    currentSkillComponent() {
+      return this.$route.params.id+"Component";
+    }
   }
 });
 </script>
