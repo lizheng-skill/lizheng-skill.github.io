@@ -1,14 +1,14 @@
 import { mount } from '@vue/test-utils'
-import FolderPage from '@/views/FolderPage.vue'
+import SkillPage from '@/views/SkillPage.vue'
 
-describe('FolderPage.vue', () => {
+describe('SkillPage.vue', () => {
   it('renders folder view', () => {
     const mockRoute = {
       params: {
-        id: 'Outbox'
+        id: 'SAP'
       }
     }
-    const wrapper = mount(FolderPage, {
+    const wrapper = mount(SkillPage, {
       global: {
         mocks: {
           $route: mockRoute

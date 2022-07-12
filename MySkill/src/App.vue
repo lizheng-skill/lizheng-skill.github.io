@@ -4,8 +4,8 @@
       <ion-menu content-id="main-content" type="overlay">
         <ion-content>
           <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
+            <ion-list-header>Li Zheng's Skills</ion-list-header>
+            <ion-note>lizheng.work@outlook.com</ion-note>
   
             <ion-menu-toggle auto-hide="false" v-for="(p, i) in appPages" :key="i">
               <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
@@ -56,45 +56,45 @@ export default defineComponent({
     const selectedIndex = ref(0);
     const appPages = [
       {
-        title: 'Inbox',
-        url: '/folder/Inbox',
+        title: 'SAP',
+        url: '/skills/SAP',
         iosIcon: mailOutline,
         mdIcon: mailSharp
       },
       {
-        title: 'Outbox',
-        url: '/folder/Outbox',
+        title: 'DLP',
+        url: '/skills/DLP',
         iosIcon: paperPlaneOutline,
         mdIcon: paperPlaneSharp
       },
       {
-        title: 'Favorites',
-        url: '/folder/Favorites',
+        title: 'Ionic',
+        url: '/skills/Ionic',
         iosIcon: heartOutline,
         mdIcon: heartSharp
       },
       {
-        title: 'Archived',
-        url: '/folder/Archived',
+        title: 'RPA',
+        url: '/skills/RPA',
         iosIcon: archiveOutline,
         mdIcon: archiveSharp
       },
       {
-        title: 'Trash',
-        url: '/folder/Trash',
+        title: 'MFA',
+        url: '/skills/MFA',
         iosIcon: trashOutline,
         mdIcon: trashSharp
       },
       {
-        title: 'Spam',
-        url: '/folder/Spam',
+        title: 'EDI',
+        url: '/skills/EDI',
         iosIcon: warningOutline,
         mdIcon: warningSharp
       }
     ];
-    const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+    const labels = ['SAP-Basis', 'SAP-HANA', 'RPA', 'Ionic', 'DLP', 'EDI'];
     
-    const path = window.location.pathname.split('folder/')[1];
+    const path = window.location.pathname.split('skills/')[1];
     if (path !== undefined) {
       selectedIndex.value = appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
