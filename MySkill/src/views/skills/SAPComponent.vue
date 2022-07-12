@@ -39,7 +39,10 @@ export default defineComponent({
   },
   data() {
     var list:any;
-    fetch("article/sap.json").then(json => {list = json})
+    fetch("article/sap.json").then(
+    data => {
+      list = data.json()
+      })
     return {
       sapArticleList: list,
     };
