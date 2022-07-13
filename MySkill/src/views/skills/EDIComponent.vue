@@ -6,13 +6,17 @@
       </ion-toolbar>
       <ion-content>
         <ion-list>
-          <ion-item>What's DLP</ion-item>
-          <ion-item>How to DLP</ion-item>
-          <ion-item>Where to Get DLP</ion-item>
-          <ion-item>DLP Solutions</ion-item>
+          <ion-item
+            v-for="(article, index) in ediArticleList"
+            lines="none"
+            :key="index"
+            v-on:click="handleClick(article.url)">
+            <ion-label>{{ article.title }}</ion-label>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
+    <div v-bind:innerHTML="markedown"></div>
     <ion-router-outlet id="edi-main"></ion-router-outlet>
   </ion-content>
 </template>
@@ -22,11 +26,11 @@ import {
   IonItem,
   IonList,
   IonMenu,
-  IonRouterOutlet,
   IonTitle,
   IonToolbar,
 } from "@ionic/vue";
 import { defineComponent} from 'vue';
+import {marked} from "marked";
 export default defineComponent({
   name: 'EDIComponent',
   components: {
@@ -34,10 +38,32 @@ export default defineComponent({
     IonItem,
     IonList,
     IonMenu,
-    IonRouterOutlet,
     IonTitle,
     IonToolbar,
-  }
-
+  },
+  data() {
+    return {
+      ediArticleList: [],
+      markedown:""
+    };
+  },
+  created() {
+    fetch("assets/article/edi.json").then(async (response) => {
+      this.ediArticleList = await response.json();
+    });
+  },
+  methods: {
+    handleClick(selectedURL:string){
+      if(selectedURL!=""){
+        let res = ""; 
+        fetch("assets/article/edi/" + selectedURL).then(async (response) => {
+          res = await response.text();
+          this.markedown = marked(res, { sanitize: false });
+        });
+      }else{
+        this.markedown = "";
+      }
+    }
+  },
 });
 </script>

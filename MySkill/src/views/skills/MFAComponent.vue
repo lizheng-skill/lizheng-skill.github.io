@@ -6,13 +6,17 @@
       </ion-toolbar>
       <ion-content>
         <ion-list>
-          <ion-item>What's DLP</ion-item>
-          <ion-item>How to DLP</ion-item>
-          <ion-item>Where to Get DLP</ion-item>
-          <ion-item>DLP Solutions</ion-item>
+          <ion-item
+            v-for="(article, index) in mfaArticleList"
+            lines="none"
+            :key="index"
+            v-on:click="handleClick(article.url)">
+            <ion-label>{{ article.title }}</ion-label>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
+    <div v-bind:innerHTML="markedown"></div>
     <ion-router-outlet id="mfa-main"></ion-router-outlet>
   </ion-content>
 </template>
@@ -22,11 +26,11 @@ import {
   IonItem,
   IonList,
   IonMenu,
-  IonRouterOutlet,
   IonTitle,
   IonToolbar,
 } from "@ionic/vue";
 import { defineComponent} from 'vue';
+import {marked} from "marked";
 export default defineComponent({
   name: 'MFAComponent',
   components: {
@@ -34,10 +38,32 @@ export default defineComponent({
     IonItem,
     IonList,
     IonMenu,
-    IonRouterOutlet,
     IonTitle,
     IonToolbar,
-  }
-
+  },
+  data() {
+    return {
+      mfaArticleList: [],
+      markedown:""
+    };
+  },
+  created() {
+    fetch("assets/article/mfa.json").then(async (response) => {
+      this.mfaArticleList = await response.json();
+    });
+  },
+  methods: {
+    handleClick(selectedURL:string){
+      if(selectedURL!=""){
+        let res = ""; 
+        fetch("assets/article/mfa/" + selectedURL).then(async (response) => {
+          res = await response.text();
+          this.markedown = marked(res, { sanitize: false });
+        });
+      }else{
+        this.markedown = "";
+      }
+    }
+  },
 });
 </script>

@@ -1,3 +1,4 @@
+@IonicPage()
 <template>
   <ion-page>
     <ion-header :translucent="true">

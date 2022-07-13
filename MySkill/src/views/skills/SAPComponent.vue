@@ -26,7 +26,6 @@ import {
   IonItem,
   IonList,
   IonMenu,
-  IonRouterOutlet,
   IonTitle,
   IonToolbar,
 } from "@ionic/vue";
@@ -39,7 +38,6 @@ export default defineComponent({
     IonItem,
     IonList,
     IonMenu,
-    IonRouterOutlet,
     IonTitle,
     IonToolbar,
   },
