@@ -7,5 +7,12 @@
             {"file":"sap-001.html"},
             {"file":"sap-002.html"}
         ]
+    },
+    {
+        "url":"sap-edit-tms-rfc.md",
+        "title":"Edit TMS RFC",
+        "abstract":"how to edit tms rfc in SM59",
+        "ref":[
+        ]
     }
 ]
